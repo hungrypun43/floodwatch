@@ -46,4 +46,5 @@
 	microgear.resettoken(function(err){
 		microgear.connect(APPID);
 	});
+	
 </script>
