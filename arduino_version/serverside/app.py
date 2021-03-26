@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = 'my super secret key'.encode('utf8')
 
 def addpods(data):
-    myclient = pymongo.MongoClient("mongodb+srv://root:password32124@try1.xqhda.mongodb.net/test")
+    myclient = pymongo.MongoClient("mongodb+srv://root:password32124@try1.xqhda.mongodb.net/test") #My test server link that will change when you install in another server 
     mydb = myclient["floodwatch"]
     mycol = mydb["pods"]
     newpod = {
