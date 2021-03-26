@@ -1,5 +1,9 @@
-#Making Floodwatch Pod
+# Making Floodwatch Pod
 
-##items
-1. Arduino with ESP32 wifi module x1
-2. SR04 Ultrasonic Sensor x1
+## Hardware Component
+1. NodeMCU V2 
+2. Ultrasonic Sensor HC-SR04
+3. 330 ohm Resistor x3
+4. Red LED
+5. Yellow LED
+6. Green LED
