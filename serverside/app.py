@@ -12,7 +12,6 @@ def connect():
     return mydb
 
 def addpods(data):
-    #myclient = pymongo.MongoClient("mongodb+srv://root:password32124@try1.xqhda.mongodb.net/test") #My test server link that will change when you install in another server 
     mydb = connect()
     mycol = mydb["pods"]
     key = str(uuid.uuid4())
