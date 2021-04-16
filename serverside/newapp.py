@@ -30,7 +30,11 @@ def addpods(data):
         "podkey" : key,
         "podstatus": 0,
         "height": 0,
-        "setuph": data["sheight"]
+        "setuph": data["sheight"],
+        "latitude": data["latitude"],
+        "longtitude": data["longtitude"],
+        "aware": data["aware"],
+        "harm": data["harm"]
     }
     mycol.insert_one(newpod)
     myfeed.insert_one(newfeed)
@@ -106,7 +110,12 @@ def create():
     data = request.get_json()
     n = addpods(data)
     print(n)
-    return "gotit"
+    res = {
+        "podname": data["podname"],
+        "podkey": n["podkey"],
+        "secretkey": data["podpassword"]
+    }
+    return res
 
 @app.route("/getpoddata/<keys>", methods=["GET"])
 def show(keys):
