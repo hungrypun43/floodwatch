@@ -151,11 +151,11 @@ def uppod(currentpod):
     h = mydata["setuph"] - data["height"]
     p_update(currentpod, 'height', h)
     mydata = findpoddata_bykey(currentpod)
-    res = {
+    '''res = {
         "message" : "updated",
         "status" : mydata["podstatus"]
     }
-    return res
-
+    #return res'''
+    return str(mydata["podstatus"])
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port='5555', debug=True)

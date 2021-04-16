@@ -157,7 +157,8 @@ def uppod(keys):
             "message" : "updated",
             "status" : mydata["podstatus"]
         }
-        return res
+        #return res
+        return str(mydata["podstatus"])
     res = {
         "message" : "failed"
     }
