@@ -50,11 +50,20 @@ def findpoddata_bykey(key):
     print(u)
     return u
 
+
 def p_update(pointer, what, value):
     mydb = connect()
     mycol = mydb["feed"]
     mycol.find_one_and_update({'podkey': pointer},{'$set': {what:value}})
     print("updated")
+    mydata = findpoddata_bykey(pointer)
+    if what == "height":
+        if value < mydata["aware"]:
+            mycol.find_one_and_update({'podkey': pointer},{'$set': {"podstatus":1}})
+        elif value < mydata["harm"]:
+            mycol.find_one_and_update({'podkey': pointer},{'$set': {"podstatus":2}})
+        else:
+            mycol.find_one_and_update({'podkey': pointer},{'$set': {"podstatus":3}})
     findpoddata_bykey(pointer)
 
 def token_required(function):
@@ -141,7 +150,12 @@ def uppod(currentpod):
     print(mydata)
     h = mydata["setuph"] - data["height"]
     p_update(currentpod, 'height', h)
-    return "updated"
+    mydata = findpoddata_bykey(currentpod)
+    res = {
+        "message" : "updated",
+        "status" : mydata["podstatus"]
+    }
+    return res
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port='5555', debug=True)
