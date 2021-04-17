@@ -8,7 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <title>AddFloodwatchPOD</title>
+    <title>EditPOD</title>
 </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Floodwatch</a>
@@ -47,47 +47,8 @@
   </nav>
 
 <body>
-  <div class="modal fade" id="completeModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          
-          <h4 class="modal-title" id="completePodname">Copy This to Use with pod</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body">
-          <form>
-  				<div class="form-group">
-    				<label for="formGroupExampleInput">Podkey</label>
-    				<div class="input-group mb-3">
-  						<input type="text" class="form-control" id="completePodkey" placeholder="Podkey" aria-label="Recipient's username" aria-describedby="basic-addon2">
-  						<div class="input-group-append">
-    						<button class="btn btn-outline-secondary" onclick="copyClipboard('completePodkey')" type="button">copy</button>
-  						</div>
-					</div>
-  				</div>
-  				<div class="form-group">
-    				<label for="formGroupExampleInput2">SecretKey</label>
-    				<div class="input-group mb-3">
-  						<input type="text" class="form-control" id="completeSecretkey" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
-  						<div class="input-group-append">
-    						<button class="btn btn-outline-secondary" onclick="copyClipboard('completeSecretkey')" type="button">Copy</button>
-  						</div>
-					</div>
-  				</div>
-			</form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
     <div class="container">
-        <h1>Create new Pod</h1>
+        <h1 id="headlabel">Edit Pod</h1>
         <form>
             <div class="form-group">
                 <label for="exampleFormControlInput1">Pod address</label>
@@ -103,10 +64,6 @@
             <div class="form-group">
                 <label for="exampleFormControlInput1">PodName</label>
                 <input type="text" class="form-control" id="podname" placeholder="AddPodNickname">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">SecretKey</label>
-                <input type="" class="form-control" id="secretKey" placeholder="SecretKey">
             </div>
             <div class="form-group">
                 <label for="exampleFormControlInput1">Height</label>
@@ -126,8 +83,8 @@
                 </div>
             </div>
         </form>
-        <button type="button" class="btn btn-outline-primary btn-lg btn-block" onclick="registerPod()">Create!</button>
-        <script src="script/podmanage.js"></script>
+        <button type="button" class="btn btn-outline-primary btn-lg btn-block" onclick="editPod()">EDIT!</button>
+        <script src="script/podedit_init.js"></script>
     </div>
     
 </body>

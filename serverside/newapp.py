@@ -96,14 +96,14 @@ def greeting():
 def login():
     auth = request.authorization
     if not auth or not auth.username or not auth.password:
-        return make_response("Not found", 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'} )
+        return make_response({"message": "Not found"}, 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'} )
     user = findpod_bykey(auth.username)
     if not user:
-        return make_response("Not found", 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'} )
+        return make_response({"message": "Not found"}, 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'} )
     if check_password_hash(user["secretkey"], auth.password):
         token = jwt.encode({'public_id' : user["podkey"], 'exp' : datetime.datetime.utcnow() + datetime.timedelta(hours=1)}, app.config['SECRET_KEY'])
         return jsonify({'token' : token.decode('UTF-8')})
-    return make_response("Not found", 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'} )
+    return make_response({"message": "Not found"}, 401, {'WWW-Authenticate' : 'Basic realm="Login required!"'} )
 
 @app.route("/addpods", methods=["POST"])
 def create():
@@ -144,9 +144,33 @@ def showme(currentpod):
     #return "ok"
     res = {
         "podname": poddata["podname"],
-        "podkey" : podauth["podkey"],
-        "podseckey": podauth["secretkey"],
-        "podsetupheight": poddata["setuph"]
+        "podkey": podauth["podkey"],
+        "podsetupheight": poddata["setuph"],
+        "podlatitude": poddata["latitude"],
+        "podlongtitude": poddata["longtitude"],
+        "podaware": poddata["aware"],
+        "podharm" : poddata["harm"]
+    }
+
+    return res
+@app.route("/mydata", methods=["PUT"])
+@token_required
+def editPod(currentpod):
+    data = request.get_json()
+    p_update(currentpod, "podname", data["podname"])
+    p_update(currentpod, "setuph", data["setuph"])
+    p_update(currentpod, "latitude", data["latitude"])
+    p_update(currentpod, "longtitude", data["longtitude"])
+    p_update(currentpod, "aware", data["aware"])
+    p_update(currentpod, "harm", data["harm"])
+    poddata = findpoddata_bykey(currentpod)
+    res = {
+        "podname": poddata["podname"],
+        "podsetupheight": poddata["setuph"],
+        "podlatitude": poddata["latitude"],
+        "podlongtitude": poddata["longtitude"],
+        "podaware": poddata["aware"],
+        "podharm" : poddata["harm"]
     }
 
     return res

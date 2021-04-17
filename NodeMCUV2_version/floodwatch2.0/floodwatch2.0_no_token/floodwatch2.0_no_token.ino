@@ -54,7 +54,7 @@ void setup () {
   pinMode(YELLOW_LED,OUTPUT);
   pinMode(GREEN_LED,OUTPUT);
   Serial.begin(115200);
-  WiFi.begin("thamdeena 2.4G", "thamadee");
+  WiFi.begin("Wifiname", "Password");
  
   while (WiFi.status() != WL_CONNECTED) {
  

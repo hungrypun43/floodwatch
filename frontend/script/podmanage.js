@@ -1,9 +1,21 @@
 const URL = "http://localhost:5555";
 
 function completeModal(name, podkey, secretKey) {
-    
+    document.getElementById("completePodname").innerText = "Pod Information for " + name;
+    document.getElementById("completePodkey").value = podkey;
+    document.getElementById("completeSecretkey").value = secretKey;
+    //openModal();
+    $('#completeModal').modal({
+        show: true
+      })
 }
-
+function copyClipboard(copyid) {
+    var copyText = document.getElementById(copyid);
+    copyText.select();
+    copyText.setSelectionRange(0, 99999)
+    document.execCommand("copy");
+    alert("Copied the "+ copyid + " " + copyText.value);
+}
 function registerPod() {
     
     var nlatitude = document.getElementById("latitude").value;
@@ -33,5 +45,5 @@ function registerPod() {
             },
         })
         .then((response) => response.json())
-        .then((json) => console.log(json));
+        .then((json) => completeModal(json["podname"], json["podkey"], json["secretkey"]));
 }
