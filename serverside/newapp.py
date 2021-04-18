@@ -128,8 +128,11 @@ def show(keys):
     res = {
         "podname": poddata["podname"],
         "podkey" : podauth["podkey"],
-        "podseckey": podauth["secretkey"],
-        "podsetupheight": poddata["setuph"]
+        "podsetupheight": poddata["setuph"],
+        "podlatitude": poddata["latitude"],
+        "podlongtitude": poddata["longtitude"],
+        "podheight": poddata["height"],
+        "podstatus" : poddata["podstatus"]
     }
     return res
 
