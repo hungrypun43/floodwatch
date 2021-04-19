@@ -6,7 +6,7 @@ var x = document.getElementById("mapid");
 var mymap;
 function getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showMap);
+      //navigator.geolocation.getCurrentPosition(showMap);
       navigator.geolocation.getCurrentPosition(gotdata);
     } else {
       x.innerHTML = "Geolocation is not supported by this browser.";
