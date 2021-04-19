@@ -90,7 +90,18 @@ def token_required(function):
 
 @app.route("/")
 def greeting():
-    return "hello"
+    mydb = connect()
+    mycol = mydb["feed"]
+    data = mycol.find()
+    resd = []
+    print(resd)
+    for i in data:
+        resd.append({
+        "podkey" : i["podkey"],
+        "podlatitude": i["latitude"],
+        "podlongtitude": i["longtitude"]})
+    res = {"data" : resd}
+    return res
 
 @app.route("/auth")
 def login():

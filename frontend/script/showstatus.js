@@ -83,7 +83,22 @@ function init_fetch(podkey){
             attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
     
             }).addTo(mymap);
-            var marker = L.marker([Number(json["podlatitude"]), Number(json["podlongtitude"])]).addTo(mymap);
+            var marker = L.marker([Number(json["podlatitude"]), Number(json["podlongtitude"])], {
+                fillcolor: function() {
+                    if(status==1){
+                        return "#26fc84 ";
+                    }
+                    else if(status==2){
+                        return "#fc9b26";
+                    }
+                    else if(status==3){
+                        return "#fc2626";
+                    }
+                    else{
+                        return "#581845";
+                    }
+                  },
+            }).addTo(mymap);
         });
 }
 
