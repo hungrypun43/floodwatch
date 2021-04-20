@@ -33,11 +33,11 @@ function registerPod() {
         method: 'POST',
         body: JSON.stringify({
             podname: npodname,
-            sheight: nheight,
-            latitude: nlatitude,
-            longtitude: nlongtitude,
-            aware: naware,
-            harm: nharm,
+            sheight: Number(nheight),
+            latitude: Number(nlatitude),
+            longtitude: Number(nlongtitude),
+            aware: Number(naware),
+            harm: Number(nharm),
             podpassword: nsecretkey,
         }),
         headers: {

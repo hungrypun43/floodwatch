@@ -50,11 +50,11 @@ function editPod() {
         method: 'PUT',
         body: JSON.stringify({
             podname: npodname,
-            setuph: nheight,
-            latitude: nlatitude,
-            longtitude: nlongtitude,
-            aware: naware,
-            harm: nharm,
+            setuph: Number(nheight),
+            latitude: Number(nlatitude),
+            longtitude: Number(nlongtitude),
+            aware: Number(naware),
+            harm: Number(nharm),
         }),
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
