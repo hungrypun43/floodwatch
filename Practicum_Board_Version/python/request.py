@@ -1,11 +1,14 @@
 import requests
 
-response = requests.get("http://localhost:5555")
+flaskurl = "http://localhost:5555/uppod/"
+
+'''response = requests.get("http://localhost:5555")
 print(response.status_code)
 print(response.json())
+'''
 
 def update(value, publickey, secretkey):
-    url = "http://localhost:5555/uppod/" + publickey
+    url = flaskurl + publickey
     print(url)
     print(secretkey)
     print(publickey)
