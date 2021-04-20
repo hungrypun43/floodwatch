@@ -6,6 +6,26 @@ import jwt
 import datetime
 from functools import wraps
 from flask_cors import CORS, cross_origin
+from flask import Flask, request, abort
+
+#linebot
+from linebot import (
+    LineBotApi, WebhookHandler
+)
+from linebot.exceptions import (
+    InvalidSignatureError
+)
+from linebot.models import (
+    MessageEvent, TextMessage, TextSendMessage,
+)
+
+Channel_secret = 'a5c7b8e489524fba5ba15b3c9439ee23'
+Channel_access_token = '4N3RnBeTGC+Oxrh22LlmEXSx9IWh2/Tbzz1tMatqPsZ8XYnOGmtZ5RkOIlWLwgr7QQ2me54tw6y48gB2i0UaYoLHKzpsxOF3u/JnbSwRt9rzCgKXhUnnbMC7n129+KVzA8/XrjKuUiXZHXUfApKDjQdB04t89/1O/w1cDnyilFU='
+basic_id = '@374bcfrv'
+
+line_bot_api = LineBotApi('4N3RnBeTGC+Oxrh22LlmEXSx9IWh2/Tbzz1tMatqPsZ8XYnOGmtZ5RkOIlWLwgr7QQ2me54tw6y48gB2i0UaYoLHKzpsxOF3u/JnbSwRt9rzCgKXhUnnbMC7n129+KVzA8/XrjKuUiXZHXUfApKDjQdB04t89/1O/w1cDnyilFU=')
+handler = WebhookHandler('a5c7b8e489524fba5ba15b3c9439ee23')
+##############################################################################################
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = 'my super secret key'.encode('utf8')
@@ -62,13 +82,29 @@ def p_update(pointer, what, value):
     print("updated")
     mydata = findpoddata_bykey(pointer)
     if what == "height":
-        if value < mydata["aware"]:
+        if value < (mydata["aware"]/mydata["setuph"]*100):
             mycol.find_one_and_update({'podkey': pointer},{'$set': {"podstatus":1}})
-        elif value < mydata["harm"]:
+        elif value < (mydata["harm"]/mydata["setuph"]*100):
             mycol.find_one_and_update({'podkey': pointer},{'$set': {"podstatus":2}})
         else:
             mycol.find_one_and_update({'podkey': pointer},{'$set': {"podstatus":3}})
     findpoddata_bykey(pointer)
+
+#line_bot_api
+
+def broadcast_message(message):
+    line_bot_api.broadcast(TextSendMessage(
+        text=message))
+
+    return 'Notified Janitors'
+
+def status(postition, status_number):
+    if status_number == 2:
+        return postition + "มีน้ำท่วมในระดับที่ไม่เหมาะกับการเดินเท้า"
+    elif status_number == 3:
+        return postition + "มีน้ำท่วมสูงไม่เหมาะกับการนำรถยนต์ขนาดเล็กผ่าน"
+
+################################################################
 
 def token_required(function):
     @wraps(function)
@@ -200,6 +236,8 @@ def uppod(keys):
         h = mydata["setuph"] - data["height"]
         p_update(keys, 'height', h)
         mydata = findpoddata_bykey(keys)
+        if(mydata["podstatus"]>1):
+            broadcast_message(status(mydata["podname"], mydata["podstatus"]))
         res = {
             "message" : "updated",
             "status" : mydata["podstatus"]
