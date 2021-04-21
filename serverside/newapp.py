@@ -82,9 +82,9 @@ def p_update(pointer, what, value):
     print("updated")
     mydata = findpoddata_bykey(pointer)
     if what == "height":
-        if value < (mydata["aware"]/mydata["setuph"]*100):
+        if (value/mydata["setuph"]*100) < (mydata["aware"]):
             mycol.find_one_and_update({'podkey': pointer},{'$set': {"podstatus":1}})
-        elif value < (mydata["harm"]/mydata["setuph"]*100):
+        elif (value/mydata["setuph"]*100) < (mydata["harm"]):
             mycol.find_one_and_update({'podkey': pointer},{'$set': {"podstatus":2}})
         else:
             mycol.find_one_and_update({'podkey': pointer},{'$set': {"podstatus":3}})
