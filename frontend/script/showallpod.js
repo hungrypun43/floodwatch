@@ -22,8 +22,11 @@ function status(st){
     else if(st==1){
         return "🟢 สถานการณ์ปกติ";
     }
+    else{
+        return "ยังไม่มีการวัดค่า";
+    }
 }
-function showallpod(params) {
+function showallpod() {
     document.getElementById("podstable").innerHTML = document.getElementById("podstable").innerHTML + "</tbody></table>"
     fetch(URL)
         .then((response) => response.json())
