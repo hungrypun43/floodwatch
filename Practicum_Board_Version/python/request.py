@@ -1,6 +1,6 @@
 import requests
 
-flaskurl = "http://localhost:5555/uppod/"
+flaskurl = "http://4e4b74a2d113.ngrok.io/uppod/"
 
 '''response = requests.get("http://localhost:5555")
 print(response.status_code)

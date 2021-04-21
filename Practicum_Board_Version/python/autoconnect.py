@@ -12,6 +12,7 @@ def working():
     res = int(peri.get_value()[1])
     print(res)
     status = request.update(res, '7a2b463d-b450-432e-a69c-1a14efa7d428', 'toofasttoawake')
+    status = int(status)
     print(status)
     peri.set_status(status)
 

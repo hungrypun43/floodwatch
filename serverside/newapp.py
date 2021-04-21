@@ -133,7 +133,9 @@ def greeting():
     print(resd)
     for i in data:
         resd.append({
+        "podname": i["podname"],
         "podkey" : i["podkey"],
+        "podstatus": i["podstatus"],
         "podlatitude": i["latitude"],
         "podlongtitude": i["longtitude"]})
     res = {"data" : resd}
